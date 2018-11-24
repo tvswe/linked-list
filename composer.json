@@ -1,0 +1,27 @@
+{
+  "name": "tvswe/linked-list",
+  "type": "library",
+  "description": "PHP Linked List",
+  "keywords": [
+    "php, linked, list"
+  ],
+  "homepage": "http://tvswe.eu/",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Tino Vogel",
+      "email": "tv.swe@gmx.de"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Tvswe\\LinkedList\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=7.1.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7"
+  }
+}
