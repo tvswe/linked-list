@@ -1,13 +1,13 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
+use Tvswe\LinkedList\LinkedList;
 
-final class LinkedListTest extends TestCase
+final class LinkedListFromPayloadTest extends TestCase
 {
     public function testCanPrependPayloadToList(): void
     {
-        $list = new \Tvswe\LinkedList\LinkedList(3);
+        $list = LinkedList::createFromPayload(3);
         $list->prepend(2);
         $list->prepend(1);
 
@@ -17,7 +17,7 @@ final class LinkedListTest extends TestCase
 
     public function testCanAppendPayloadToList(): void
     {
-        $list = new \Tvswe\LinkedList\LinkedList(1);
+        $list = LinkedList::createFromPayload(1);
         $list->append(2);
         $list->append(3);
 
@@ -27,7 +27,7 @@ final class LinkedListTest extends TestCase
 
     public function testCanIterateList(): void
     {
-        $list = new \Tvswe\LinkedList\LinkedList(3);
+        $list = LinkedList::createFromPayload(3);
         $list->prepend(2);
         $list->append(4);
         $list->prepend(1);
@@ -41,15 +41,15 @@ final class LinkedListTest extends TestCase
 
     public function testCanCountListNodes(): void
     {
-        $list = new \Tvswe\LinkedList\LinkedList(3);
-        $this->assertEquals(1, count($list));
+        $list = LinkedList::createFromPayload(3);
+        $this->assertCount(1, $list);
 
         $list->append(4);
         $list->prepend(2);
-        $this->assertEquals(3, count($list));
+        $this->assertCount(3, $list);
 
         $list->append(5);
         $list->prepend(1);
-        $this->assertEquals(5, count($list));
+        $this->assertCount(5, $list);
     }
 }

@@ -13,11 +13,31 @@ class LinkedList implements LinkedListInterface, \IteratorAggregate, \Countable
     /** @var int */
     private $length;
 
-    public function __construct($firstPayload)
+    private function __construct(ListNodeInterface $first, ListNodeInterface $last, int $length = 1)
     {
-        $this->first = $this->createListNode($firstPayload);
-        $this->last = $this->first;
-        $this->length = 1;
+        $this->first = $first;
+        $this->last = $last;
+        $this->length = $length;
+    }
+
+    public static function createFromPayload($firstPayload): self
+    {
+        $listNode = self::createListNode($firstPayload);
+
+        return new self($listNode, $listNode);
+    }
+
+    public static function createFromListNode(ListNodeInterface $first): self
+    {
+        $last = $first;
+        $length = 1;
+
+        while ($current = $last->getNext()) {
+            $last = $current;
+            $length++;
+        }
+
+        return new self($first, $last, $length);
     }
 
     public function prepend($payload): void
@@ -36,7 +56,7 @@ class LinkedList implements LinkedListInterface, \IteratorAggregate, \Countable
         $this->length++;
     }
 
-    protected function createListNode($payload): ListNodeInterface
+    protected static function createListNode($payload): ListNodeInterface
     {
         return new ListNode($payload);
     }
