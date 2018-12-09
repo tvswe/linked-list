@@ -2,7 +2,7 @@
 
 namespace Tvswe\LinkedList;
 
-interface LinkedListInterface
+interface LinkedListInterface extends \Countable
 {
     public function append($payload);
 

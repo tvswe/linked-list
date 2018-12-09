@@ -2,7 +2,7 @@
 
 namespace Tvswe\LinkedList;
 
-class LinkedList implements LinkedListInterface, \IteratorAggregate, \Countable
+class LinkedList implements LinkedListInterface, \IteratorAggregate
 {
     /** @var ListNodeInterface */
     private $first;
@@ -59,6 +59,20 @@ class LinkedList implements LinkedListInterface, \IteratorAggregate, \Countable
     protected static function createListNode($payload): ListNodeInterface
     {
         return new ListNode($payload);
+    }
+
+    public function prependList(LinkedListInterface $list): void
+    {
+        $list->getLastNode()->setNext($this->first);
+        $this->first = $list->getFirstNode();
+        $this->length += count($list);
+    }
+
+    public function appendList(LinkedListInterface $list): void
+    {
+        $this->last->setNext($list->getFirstNode());
+        $this->last = $list->getLastNode();
+        $this->length += count($list);
     }
 
     public function getFirstNode(): ListNodeInterface
